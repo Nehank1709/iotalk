@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintNewGroup"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:background="@drawable/gradient_profileinfo"
+            android:orientation="horizontal"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textViewNewGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="43dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/fashionfetishbold"
+                android:gravity="center_vertical"
+                android:text="New Group"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toEndOf="@id/viewSearchNewGroup"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/viewSearchNewGroup"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/backarrow"
+                app:layout_constraintStart_toStartOf="@id/constraintNewGroup"
+                app:layout_constraintTop_toTopOf="@id/constraintNewGroup" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="35dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintNewGroup">
+
+            <ImageView
+                android:id="@+id/imageViewCameraIconNewGroup"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/roundbluebordergrouppic"
+                android:paddingTop="17dp"
+                android:paddingBottom="17dp"
+                android:src="@drawable/cameranewgroupicon"
+                app:layout_constraintStart_toStartOf="@id/constraintLayout2"
+                app:layout_constraintTop_toTopOf="@id/constraintLayout2" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imageViewCameraIconNewGroup"
+                app:layout_constraintTop_toTopOf="@id/constraintLayout2">
+
+                <EditText
+                    android:id="@+id/editTextGroupSubjectNewGroup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#9F9F9F"
+                    android:ems="10"
+                    android:fontFamily="@font/fashionfetishbold"
+                    android:hint="Type group subject here..."
+                    android:inputType="textPersonName"
+                    android:textColor="#000000"
+                    android:textColorHint="#9F9F9F"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text=" Provide a group subject and optional group icon"
+                    android:textColor="#9F9F9F"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <EditText
+            android:id="@+id/editTextGroupDescriptionNewGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="#9F9F9F"
+            android:ems="10"
+            android:fontFamily="@font/fashionfetishbold"
+            android:foregroundGravity="center_vertical"
+            android:hint="Group description (optional)"
+            android:inputType="textPersonName"
+            android:textColor="#000000"
+            android:textColorHint="#9F9F9F"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+
+        <TextView
+            android:id="@id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/fashionfetishbold"
+            android:gravity="center_vertical"
+            android:text=" Choose participants"
+            android:textColor="#9F9F9F"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/editTextGroupDescriptionNewGroup" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewNewGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textView3" />
+
+        <ImageView
+            android:id="@+id/formGroupButton"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/gradient_signin"
+            android:paddingTop="5dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/checkmarksignin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

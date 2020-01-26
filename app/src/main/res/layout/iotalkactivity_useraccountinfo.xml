@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayoutUserAccountInfo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewSetupAccountUserAccountInfo"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center"
+            android:layout_height="62dp"
+            android:background="@drawable/gradient_profileinfo"
+            android:fontFamily="@font/chivoregular"
+            android:text="Setup Your Account"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp" />
+
+
+            <LinearLayout
+                android:id="@+id/linearLayoutUserAccountInfo2"
+                android:layout_width="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewSetupAccountUserAccountInfo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/profilePicUserAccountInfo2"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_below="@+id/header_cover_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="127dp"
+                    android:layout_marginTop="25dp"
+                    android:clickable="true"
+                    android:elevation="5dp"
+                    android:padding="20dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/contactpicsignin" />
+
+                <TextView
+                    android:id="@+id/textViewUserAccountInfo2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/chivoregular"
+                    android:gravity="center"
+                    android:text="Please provide your name and \n an optional profile photo "
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/editTextUserName2"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/usernamebioborder"
+                    android:ellipsize="end"
+                    android:ems="10"
+                    android:fontFamily="@font/chivoregular"
+                    android:hint=" Enter Username "
+                    android:inputType="textPersonName"
+                    android:textColor="#000000"
+                    android:textColorHint="#81818A" />
+
+                <TextView
+                    android:id="@+id/textView2UserAccountInfo2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/chivoregular"
+                    android:text=" Enter Bio"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/editTextBioUserAccountInfo2"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/usernamebioborder"
+                    android:ellipsize="end"
+                    android:ems="10"
+                    android:fontFamily="@font/chivoregular"
+                    android:hint=" Hello there! "
+                    android:inputType="text"
+                    android:textColor="#000000"
+                    android:textColorHint="#81818A" />
+
+                <TextView
+                    android:id="@+id/textView3ChooseLanguage2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:fontFamily="@font/chivoregular"
+                    android:text=" Choose the languages you code in..."
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3UserProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/usernamebioborder"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textViewSelectCodeLanguageUserProfile"
+                        android:layout_width="244dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/chivoregular"
+                        android:gravity="center_vertical"
+                        android:text=" Choose code language "
+                        android:textColor="#81818A"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:id="@+id/imageViewUpArrowUserProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="13dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/purpleuparrow" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/textViewProceedUserAccountInfo2"
+                    android:layout_width="match_parent"
+                    android:layout_height="73dp"
+                    android:layout_marginStart="30dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="30dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginEnd="30dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/gradient_signin2"
+                    android:fontFamily="@font/chivoregular"
+                    android:gravity="center"
+                    android:hint="Choose Code language"
+                    android:inputType="textPersonName"
+
+                    android:spinnerMode="dropdown"
+                    android:text="Proceed "
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewUserAccountInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="176dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="-390dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/codelanguagelistbackground"
+                    android:fadeScrollbars="false"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbarThumbVertical="@android:color/holo_purple"
+                    android:visibility="visible" />
+
+                <ImageView
+                    android:id="@+id/imageViewWhiteDownArrowUserProfile"
+                    android:layout_width="34dp"
+
+                    android:layout_height="22dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-4dp"
+                    android:background="@drawable/whitedownarrow"
+                    android:visibility="gone" />
+
+
+            </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

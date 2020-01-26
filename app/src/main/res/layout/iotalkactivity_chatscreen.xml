@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayoutChatScreen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2ChatScreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_profileinfo"
+        android:orientation="vertical"
+        android:textColor="#FFFFFF"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/selectedChatScreenActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="3dp"
+            android:background="@drawable/gradient_profileinfo"
+            android:orientation="horizontal"
+            android:textColor="#FFFFFF"
+            android:textSize="30sp"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/imageViewBackArrow"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="11dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/backarrow" />
+
+            <TextView
+                android:id="@+id/noOfItemsSelected"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="11dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/chivoregular"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="#FFFFFF"
+                android:textSize="24sp" />
+
+            <ImageView
+                android:id="@+id/pushPinIconImageView"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="17dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/pushpinicon" />
+
+            <ImageView
+                android:id="@+id/muteIconImageView"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="17dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/muteicon" />
+
+            <ImageView
+                android:id="@+id/archiveIconImageView"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="17dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/archiveicon" />
+
+            <ImageView
+                android:id="@+id/settingsIconImageView"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="17dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/settingschatscreen" />
+
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout3ChatScreen"
+            android:layout_width="match_parent"
+            android:layout_height="62dp"
+            android:orientation="horizontal"
+            tools:visibility="visible">
+
+
+            <ImageView
+                android:id="@+id/imageViewBackButton"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:layout_weight="1"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/backarrow" />
+
+            <TextView
+                android:id="@+id/textViewIOTalkChatScreen"
+                android:layout_width="wrap_content"
+                android:layout_height="43dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/fashionfetishbold"
+                android:gravity="center_vertical"
+                android:text="IOTalk"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:visibility="visible"
+                app:layout_constraintStart_toEndOf="@id/imageViewBackButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editTextSearchChatScreen"
+                android:layout_width="350dp"
+                android:layout_height="57dp"
+                android:layout_marginStart="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="#FFFFFF"
+                android:ems="10"
+                android:fontFamily="@font/fashionfetishbold"
+                android:gravity="center_vertical"
+                android:inputType="textPersonName"
+                android:text="Search..."
+                android:textColor="#F2F2F2"
+                android:textColorHint="#F2F2F2"
+                android:textSize="24sp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@id/imageViewBackButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/viewSearchChatScreen"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/searchiconchatscreen"
+                android:visibility="visible"
+                app:layout_constraintEnd_toStartOf="@id/viewSettingsChatScreen"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/viewSettingsChatScreen"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/settingschatscreen"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:tabSelectedTextColor="#FFFFFF"
+            app:tabTextColor="#FFFFFF"
+            tools:visibility="visible">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/chivoregular"
+                android:gravity="center"
+                android:text="Chat"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabArchives"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/chivoregular"
+                android:gravity="center"
+                android:text="Archives"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/chivoregular"
+                android:gravity="center"
+                android:text="Code"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp" />
+        </com.google.android.material.tabs.TabLayout>
+
+
+    </LinearLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpagerChatList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="120dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2ChatScreen" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionNewChat"
+        android:layout_width="wrap_content"
+        android:layout_height="66dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/newchaticon"
+        app:backgroundTint="#ffffff"
+        app:fabCustomSize="56dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="56dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

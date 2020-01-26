@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/Details"
+        android:title="Details" />
+    <item
+        android:id="@+id/Search"
+        android:title="Search" />
+    <item
+        android:id="@+id/Wallpaper"
+        android:title="Wallpaper"/>
+    <item
+        android:id="@+id/Export"
+        android:title="Export" />
+    <item android:id="@+id/Clear_Chat"
+        android:title="Clear Chat" />
+    <item
+        android:id="@+id/Add_Shortcut"
+        android:title="Add Shortcut" />
+</menu>
