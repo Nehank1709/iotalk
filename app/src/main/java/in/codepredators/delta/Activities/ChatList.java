@@ -494,11 +494,9 @@ public class ChatList extends AppCompatActivity {
         } else {
             selectedChatList.add(m);
         }
-        if (selectedChatCount > 1) {
             noOfChatsSelected.setText(String.valueOf(selectedChatCount));
-        } else {
-            noOfChatsSelected.setText(String.valueOf(selectedChatCount));
-        }
+        Log.i("selectedresult",m.getPersonalMessage().getPID());
+
     }
 }
 //    private void seeMessages()
