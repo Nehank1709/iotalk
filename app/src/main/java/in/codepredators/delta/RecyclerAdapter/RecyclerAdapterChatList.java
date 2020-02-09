@@ -1,6 +1,7 @@
 package in.codepredators.delta.RecyclerAdapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
@@ -16,12 +17,13 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import in.codepredators.delta.Activities.Chat;
 import in.codepredators.delta.Activities.ChatList;
 import in.codepredators.delta.R;
 
 
 public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapterChatList.ViewHolderChatScreen> {
-    private List<ChatList.ChatListItem> userList;
+    private List<ChatList.ChatListItem> chatListItemList;
     private  Context context;
     int a = 0;
 
@@ -45,7 +47,7 @@ public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapte
     public RecyclerAdapterChatList(Context context ,List<ChatList.ChatListItem> userList)
     {
         this.context = context;
-        this.userList = userList;
+        this.chatListItemList = userList;
     }
 
     public ViewGroup viewGroup1;
@@ -60,13 +62,14 @@ public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolderChatScreen viewHolder, final int i) {
-        ChatList.ChatListItem chatListItem = userList.get(i);
+        ChatList.ChatListItem chatListItem = chatListItemList.get(i);
         viewHolder.chatListName.setText(chatListItem.getUser().getUserName());
         viewHolder.messageTime.setText(chatListItem.getMessage().getMessageTime());
+        Log.i("recyclerunseenmessage"," " + chatListItem.getNoOfUnseenMessage());
         viewHolder.noOfUnseenMessage.setText(chatListItem.getNoOfUnseenMessage());
         Log.i("user name","gyg" + chatListItem.getUser().getUserName());
-        Log.i("message time" +
-                "",chatListItem.getMessage().getMessageTime());
+       // Log.i("messagetime" +
+       //         "",chatListItem.getMessage().getMessageTime() + " ");
 
         viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -75,7 +78,7 @@ public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapte
                 int colorId = viewColor.getColor();
                 if (colorId != Color.parseColor("#1af0ff")) {
                     a++;
-                    ChatList.selectedChat(userList.get(i),a);
+                    ChatList.selectedChat(chatListItemList.get(i),a);
                     viewHolder.backgroundColor.setBackgroundColor(Color.parseColor("#1af0ff"));
                 }
                 //Toast.makeText(getContext(), "long Click" + position+"  ", Toast.LENGTH_SHORT).show();
@@ -96,13 +99,19 @@ public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapte
                         a++;
                         viewHolder.backgroundColor.setBackgroundColor(Color.parseColor("#1af0ff"));
                     }
-                    ChatList.selectedChat(userList.get(i), a);
+                    ChatList.selectedChat(chatListItemList.get(i), a);
+                }else{
+                    Intent intent = new Intent(context, Chat.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intent);
+                }
             }
-        }
-    });
+        });
+
+
     }
     @Override
     public int getItemCount() {
-        return userList.size();
+        return chatListItemList.size();
     }
 }
