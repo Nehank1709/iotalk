@@ -20,12 +20,13 @@ import in.codepredators.delta.RecyclerAdapter.RecyclerAdapterCode;
 import in.codepredators.delta.R;
 
 public class  CodeFragment extends Fragment {
+    RecyclerView recyclerView;
+    RecyclerAdapterCode recyclerAdapterCode ;
     @Override
     public void onStart() {
-        RecyclerView recyclerView;
         List<Message> messageList = new ArrayList<>();
         Message message= new Message();
-        RecyclerAdapterCode recyclerAdapterCode ;
+
         super.onStart();
         recyclerView = getView().findViewById(R.id.viewpagerChatRecycler);
 
@@ -65,7 +66,9 @@ public class  CodeFragment extends Fragment {
     public void searchList(String searchText){
         Log.i("searchList code"," " + searchText);
     }
-
+    public void refreshRecycler(){
+        recyclerAdapterCode.refreshRecycler();
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
