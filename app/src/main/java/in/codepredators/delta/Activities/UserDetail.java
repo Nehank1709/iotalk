@@ -220,6 +220,7 @@ public class UserDetail extends AppCompatActivity {
 
                 FirebaseDatabase.getInstance().getReference().child("users").child(UID).setValue(user);
 
+
                 //  FirebaseDatabase.getInstance().getReference().child("users").child(UID).child("userCodeList").setValue(codeHashmap);
                 //  FirebaseDatabase.getInstance().getReference().child("users").child(UID).child("userCodeList").setValue(userCodeList);
 
