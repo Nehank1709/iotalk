@@ -71,6 +71,9 @@ public class ChatFragment extends Fragment {
             recyclerView.setAdapter(recyclerAdapterChatList);
         }
     }
+    public void refreshRecycler(){
+        recyclerAdapterChatList.refreshRecycer();
+    }
     @Override
     public void onStart() {
         super.onStart();
@@ -120,6 +123,9 @@ public class ChatFragment extends Fragment {
 //      final String UID = mAuth.getCurrentUser().getUid();
         final String UID = "MeINhuTy1oYhjiM81QIbzZFhqup1";
         final User[] authUser = {new User()};
+
+
+
         FirebaseDatabase.getInstance().getReference().child("users").child(UID).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -175,18 +181,7 @@ public class ChatFragment extends Fragment {
                                     secondList.get(sizevalue-1).setMessage(new Message());
                                     secondList.get(sizevalue-1).getMessage().setMessageTime("kkk");
                                     secondList.get(sizevalue-1).getMessage().setMID("knjn");
-//                                    int flag = -1;
-//                                    for(ChatList.ChatListItem c : chatListItemList){
-//                                        if(c.getPersonalMessage().getPID().equals(secondList.get(sizevalue-1).getPersonalMessage().getPID())){
-//                                            flag=chatListItemList.indexOf(c);
-//                                            break;
-//                                        }
-//                                    }
-//                                    if(flag!=-1){
-//                                        chatListItemList.set(flag,secondList.get(sizevalue-1));
-//                                    }else{
-//                                        chatListItemList.add(secondList.get(sizevalue-1));
-//                                    }
+
 
                                     while(activeMessages.hasNext()){
                                         Log.i("running","running");
@@ -204,8 +199,24 @@ public class ChatFragment extends Fragment {
                                     secondList.get(sizevalue - 1).getPersonalMessage().setPID(three);
                                     secondList.get(sizevalue - 1).getPersonalMessage().setPersonalUserOne(one);
                                     secondList.get(sizevalue - 1).getPersonalMessage().setPersonalUserTwo(two);
-                                    chatListItemList.add(secondList.get(sizevalue-1));
-                                    sizevalue++;
+                                    int flag = -1;
+                                    for(ChatList.ChatListItem c : chatListItemList){
+                                        if(c.getPersonalMessage().getPID().equals(secondList.get(sizevalue-1).getPersonalMessage().getPID())){
+                                            flag=chatListItemList.indexOf(c);
+                                            break;
+                                        }
+                                    }
+                                    if(flag!=-1){
+                                        chatListItemList.set(flag,secondList.get(sizevalue-1));
+                                        Log.i("updatechat","updated");
+                                        databaseHelperPersonDetail.updatePersonalChatDetails(secondList.get(sizevalue-1));
+                                    }else{
+                                        chatListItemList.add(secondList.get(sizevalue-1));
+                                        databaseHelperPersonDetail.insertPersonalChatDetail(secondList.get(sizevalue-1));
+                                        sizevalue++;
+                                    }
+//                                    chatListItemList.add(secondList.get(sizevalue-1));
+                                    //sizevalue++;
                                     recyclerAdapterChatList.notifyDataSetChanged();
 //                                    if(flag!=-1)
 //                                        sizevalue++;
@@ -230,9 +241,11 @@ public class ChatFragment extends Fragment {
                     Log.i("valuechanged","ok");
                     String pid = dataSnapshot.getKey();
                     for(ChatList.ChatListItem c : chatListItemList){
-                        if(c.getPersonalMessage()!=null && c.getPersonalMessage().getPID()!=null && c.getPersonalMessage().getPID().equals(pid)){
+                        if(c.getPersonalMessage().getPID().equals(pid)){
                             c.setNoOfUnseenMessage(String.valueOf(dataSnapshot.getChildrenCount()));
                             recyclerAdapterChatList.notifyDataSetChanged();
+                            Log.i("update","updated");
+                            databaseHelperPersonDetail.updatePersonalChatDetails(c);
                             break;
                         }
                     }
@@ -304,6 +317,21 @@ public class ChatFragment extends Fragment {
 
                 }
             });
+
+        /////
+        DatabaseReference ref2 = database.getReference().child("users").child(UID);
+        ref2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.i("change123","raj" + dataSnapshot.child("age").getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        ////
     }
 
     @Nullable
