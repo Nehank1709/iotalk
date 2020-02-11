@@ -23,7 +23,13 @@ public class RecyclerAdapterArchiveList extends RecyclerView.Adapter<RecyclerAda
     private List<ChatList.ChatListItem> chatListItemList;
 
     private Context context;
-
+    int a=0;
+    int selectedStatus = 0;
+    public void refreshRecycler(){
+        selectedStatus = 0;
+        a=0;
+        notifyDataSetChanged();
+    }
 
 
     public class ViewHolderArchive extends RecyclerView.ViewHolder {
