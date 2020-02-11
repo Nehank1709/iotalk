@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapte
     private List<ChatList.ChatListItem> chatListItemList;
     private  Context context;
     int a = 0;
+    int selectedStatus = 0;
 
     public class ViewHolderChatScreen extends RecyclerView.ViewHolder {
         public TextView messageTime;
@@ -33,6 +35,8 @@ public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapte
         public ImageView imageViewAttachIcon;
         public TextView noOfUnseenMessage;
         public ConstraintLayout backgroundColor;
+        public ImageView selectedStatus;
+
 
 
         public ViewHolderChatScreen(@NonNull View itemView) {
@@ -42,6 +46,7 @@ public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapte
             imageViewAttachIcon = itemView.findViewById(R.id.imageViewAttachIcon);
             noOfUnseenMessage = itemView.findViewById(R.id.textViewNoOfUnseenMessages);
             backgroundColor = itemView.findViewById(R.id.chatListLinearLayout1);
+            selectedStatus = itemView.findViewById(R.id.chatListTickImageView);
         }
     }
     public RecyclerAdapterChatList(Context context ,List<ChatList.ChatListItem> userList)
@@ -68,18 +73,32 @@ public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapte
         Log.i("recyclerunseenmessage"," " + chatListItem.getNoOfUnseenMessage());
         viewHolder.noOfUnseenMessage.setText(chatListItem.getNoOfUnseenMessage());
         Log.i("user name","gyg" + chatListItem.getUser().getUserName());
+        if(selectedStatus == 0){
+            viewHolder.backgroundColor.setBackgroundColor(Color.parseColor("#00000000"));
+        }
+        if ( chatListItem.getPinStatus() != null && chatListItem.getPinStatus()){
+            viewHolder.imageViewAttachIcon.setVisibility(View.VISIBLE);
+        }else{
+            viewHolder.imageViewAttachIcon.setVisibility(View.GONE);
+        }
+        if( chatListItem.getArchive() != null && chatListItem.getArchive()){
+            viewHolder.backgroundColor.setVisibility(View.GONE);
+        }else{
+            viewHolder.backgroundColor.setVisibility(View.VISIBLE);
+        }
        // Log.i("messagetime" +
        //         "",chatListItem.getMessage().getMessageTime() + " ");
 
         viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                ColorDrawable viewColor = (ColorDrawable) viewHolder.backgroundColor.getBackground();
-                int colorId = viewColor.getColor();
-                if (colorId != Color.parseColor("#1af0ff")) {
+                selectedStatus = 1;
+                Toast.makeText(context,"  " + viewHolder.selectedStatus.getVisibility(),Toast.LENGTH_LONG).show();
+                if (viewHolder.selectedStatus.getVisibility() == View.GONE) {
                     a++;
+
                     ChatList.selectedChat(chatListItemList.get(i),a);
-                    viewHolder.backgroundColor.setBackgroundColor(Color.parseColor("#1af0ff"));
+                    viewHolder.selectedStatus.setVisibility(View.VISIBLE);
                 }
                 //Toast.makeText(getContext(), "long Click" + position+"  ", Toast.LENGTH_SHORT).show();
                 return true;
@@ -90,14 +109,15 @@ public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapte
             @Override
             public void onClick(View v) {
                 if (a > 0) {
-                    ColorDrawable viewColor = (ColorDrawable) viewHolder.backgroundColor.getBackground();
-                    int colorId = viewColor.getColor();
-                    if (colorId == Color.parseColor("#1af0ff")) {
+                    if (viewHolder.selectedStatus.getVisibility() == View.VISIBLE) {
                         a--;
-                        viewHolder.backgroundColor.setBackgroundColor(Color.parseColor("#00000000"));
+                        if(a==0){
+                            selectedStatus = 0;
+                        }
+                        viewHolder.selectedStatus.setVisibility(View.GONE);
                     } else {
                         a++;
-                        viewHolder.backgroundColor.setBackgroundColor(Color.parseColor("#1af0ff"));
+                        viewHolder.selectedStatus.setVisibility(View.VISIBLE);
                     }
                     ChatList.selectedChat(chatListItemList.get(i), a);
                 }else{
@@ -109,6 +129,11 @@ public class RecyclerAdapterChatList extends RecyclerView.Adapter<RecyclerAdapte
         });
 
 
+    }
+    public void refreshRecycer(){
+        selectedStatus = 0;
+        a=0;
+        notifyDataSetChanged();
     }
     @Override
     public int getItemCount() {
