@@ -19,21 +19,21 @@ import in.codepredators.delta.Classes.User;
 
 public class DatabaseHelperPersonDetail extends SQLiteOpenHelper {
     private static final String dbName="IOTalkPersonDetail";
-    public static final String UserTable="UserTable";
-    public static final String PersonalChatTable = "PersonalTable";
-    public static final String GroupChatTable = "GroupTable";
-    public String colDatabaseID = "ID";
-    public String colDatabaseParticipant = "Participant";//UID of users in group and personal
-    public String colDatabaseName = "Name";
-    public String colDatabaseDescription = "Discription";
-    public String colDatabaseCountry = "Country";
-    public String colDatabaseTime_Creator = "Time_Creator";//creating time and creator id
-    public String colDatabaseImage = "Image";//User and image - image //Personal - id of opposite user
-    public String colDatabaseLanguage = "Language";
-    public String colDatabaseArchievePinChat = "ArchievePinChat";
-    public String colDatabaseAdmin = "Admin";
-    public String colDatabaseUnseenMessage = "UnseenMessage";
-    public String colDatabaseLastMessageId = "LastMessageId";
+    private static final String UserTable="UserTable";
+    private static final String PersonalChatTable = "PersonalTable";
+    private static final String GroupChatTable = "GroupTable";
+    private String colDatabaseID = "ID";
+    private String colDatabaseParticipant = "Participant";//UID of users in group and personal
+    private String colDatabaseName = "Name";
+    private String colDatabaseDescription = "Discription";
+    private String colDatabaseCountry = "Country";
+    private String colDatabaseTime_Creator = "Time_Creator";//creating time and creator id
+    private String colDatabaseImage = "Image";//User and image - image //Personal - id of opposite user
+    private String colDatabaseLanguage = "Language";
+    private String colDatabaseArchievePinChat = "ArchievePinChat";
+    private String colDatabaseAdmin = "Admin";
+    private String colDatabaseUnseenMessage = "UnseenMessage";
+    private String colDatabaseLastMessageId = "LastMessageId";
 
     //u r not saving phone number but u have to do that
 
@@ -80,18 +80,18 @@ public class DatabaseHelperPersonDetail extends SQLiteOpenHelper {
         DB.close();
         return ID;
     }
-    public long insertPersonalChatDetail(PersonalMessage personalMessage, String Time, String MessageId, String noOfUnseenMess, User user)
+    public long insertPersonalChatDetail(ChatList.ChatListItem chatListItem)
     {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(colDatabaseID,personalMessage.getPID());
-        values.put(colDatabaseParticipant,personalMessage.getPersonalUserOne() + "|" + personalMessage.getPersonalUserTwo());
-        values.put(colDatabaseTime_Creator,Time);
+        values.put(colDatabaseID,chatListItem.getPersonalMessage().getPID());
+        values.put(colDatabaseParticipant,chatListItem.getPersonalMessage().getPersonalUserOne() + "|" + chatListItem.getPersonalMessage().getPersonalUserTwo());
+        values.put(colDatabaseTime_Creator,"useneededornot");
         values.put(colDatabaseArchievePinChat,"false|false");
-        values.put(colDatabaseLastMessageId,MessageId);
-        values.put(colDatabaseUnseenMessage,noOfUnseenMess);
+        values.put(colDatabaseLastMessageId,chatListItem.getMessage().getMID());
+        values.put(colDatabaseUnseenMessage,chatListItem.getNoOfUnseenMessage());
         long ID = DB.insert(PersonalChatTable,null,values);
-        long id2 = insertUserDetail(user,"image","languages");
+        long id2 = insertUserDetail(chatListItem.getUser(),"image","languages");
         DB.close();
         return ID;
     }
@@ -194,16 +194,30 @@ public class DatabaseHelperPersonDetail extends SQLiteOpenHelper {
                 new String[] { String.valueOf(user.getUID()) });
 
     }
-    public void updatePersonalChatDetails( User user, PersonalMessage personalMessage,String messId,String noOfUnseenMess)
+    public void updatePersonalChatDetails(ChatList.ChatListItem chatListItem)
     {
         //updateUserDetails(user);
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues cvUpdate = new ContentValues();
-        cvUpdate.put(colDatabaseUnseenMessage,noOfUnseenMess);
-        cvUpdate.put(colDatabaseLastMessageId,messId);
-        DB.update(PersonalChatTable, cvUpdate, colDatabaseID + " = ?",
-                new String[] { String.valueOf(personalMessage.getPID()) });
-        updateUserDetails(user);
+        String state = null;
+        try {
+            if(chatListItem.getArchive()){
+                state = "true|false";
+            }
+            if (chatListItem.getPinStatus()){
+                state = "false|true";
+            }
+            cvUpdate.put(colDatabaseArchievePinChat,state);
+        }catch(Exception e){
+
+        }
+        cvUpdate.put(colDatabaseUnseenMessage,chatListItem.getNoOfUnseenMessage());
+        cvUpdate.put(colDatabaseLastMessageId,chatListItem.getMessage().getMID());
+        Log.i("update",chatListItem.getPersonalMessage().getPID());
+        int df = DB.update(PersonalChatTable, cvUpdate, colDatabaseID + " = ?",
+                new String[] { String.valueOf(chatListItem.getPersonalMessage().getPID())});
+        Log.i("update", String.valueOf(df));
+        updateUserDetails(chatListItem.getUser());
     }
     public void updateGroupChatDetails( User user)
     {
