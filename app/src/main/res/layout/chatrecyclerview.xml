@@ -64,7 +64,7 @@
                 android:layout_alignEnd="@+id/chatListProfilePic"
                 android:layout_alignBottom="@+id/chatListProfilePic"
                 android:layout_marginTop="0dp"
-                android:visibility="invisible"
+                android:visibility="gone"
                 app:srcCompat="@drawable/purplecheckbox" />
         </RelativeLayout>
 
