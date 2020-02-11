@@ -29,6 +29,9 @@ public class ArchiveFragment extends Fragment {
     FirebaseAuth mAuth;
     List<ChatList.ChatListItem> chatListItemList;
     RecyclerAdapterArchiveList recyclerAdapterArchiveList ;
+    public void refreshRecycler(){
+        recyclerAdapterArchiveList.refreshRecycler();
+    }
     @Override
     public void onStart() {
         super.onStart();
