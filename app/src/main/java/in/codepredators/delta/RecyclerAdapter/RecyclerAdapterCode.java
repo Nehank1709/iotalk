@@ -21,6 +21,7 @@ public class RecyclerAdapterCode extends RecyclerView.Adapter<RecyclerAdapterCod
 
     private List<Message> messageList;
     private Context context;
+    int selectedStatus = 0;
 
 
     public class ViewHolderCode extends RecyclerView.ViewHolder {
@@ -105,6 +106,12 @@ public class RecyclerAdapterCode extends RecyclerView.Adapter<RecyclerAdapterCod
     public void updateList(List<Message> updatedList)
     {
         messageList = updatedList;
+        notifyDataSetChanged();
+    }
+    int a =0;
+    public void refreshRecycler(){
+        selectedStatus = 0;
+        a=0;
         notifyDataSetChanged();
     }
 }
