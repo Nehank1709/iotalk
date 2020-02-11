@@ -71,13 +71,13 @@ public class ChatList extends AppCompatActivity {
     public static String UID = "abcd";
     RecyclerView chatListRecycler;
     LinearLayoutManager layoutManager;
-    RecyclerAdapterChatList recyclerAdapterChatList;
     List<ChatListItem> chatList;
     DatabaseHelperPersonDetail databaseHelperPersonDetail;
     FloatingActionButton floatingActionButton;
-    public static LinearLayout linearLayout;
+    public static LinearLayout selectedActionLinearLayout;
     public static ConstraintLayout linearLayout2 ;
     ChatListPagerAdapter chatListPagerAdapter;
+    ImageView selectedBackarrow;
 
     String testNames[] = {
             "Raj Kothari",
@@ -120,12 +120,28 @@ public class ChatList extends AppCompatActivity {
     @Override
     public void onBackPressed()
     {
+        int flag = 0;
         if(searchEditText.getVisibility()==View.VISIBLE){
             searchEditText.setText("");
             createSearchBox(1);
-        }else{
+            flag++;
+        }
+        if(selectedActionLinearLayout.getVisibility() == View.VISIBLE){
+            selectedActionLinearLayout.setVisibility(View.GONE);
+            chatListPagerAdapter.refreshRecycler(0);
+            //chatListPagerAdapter.refreshRecycler(1);
+            //chatListPagerAdapter.refreshRecycler(2);
+            selectedChatList = new ArrayList<>();
+            selectedChatCount = 0;
+            linearLayout2.setVisibility(View.VISIBLE);
+            flag++;
+        }
+        if(flag==0){
             super.onBackPressed();
         }
+//        else{
+//            super.onBackPressed();
+//        }
     }
 
     FragmentManager fm;
@@ -146,9 +162,10 @@ public class ChatList extends AppCompatActivity {
         searchEditText = findViewById(R.id.editTextSearchChatScreen);
         iotalkText = findViewById(R.id.textViewIOTalkChatScreen);
         viewPager = findViewById(R.id.viewpagerChatList);
-        linearLayout = findViewById(R.id.selectedChatScreenActionBar);
+        selectedActionLinearLayout = findViewById(R.id.selectedChatScreenActionBar);
         linearLayout2 = findViewById(R.id.linearLayout3ChatScreen);//android tto androidx in layout to solve error
         tabs = findViewById(R.id.tabs);
+        selectedBackarrow = findViewById(R.id.imageViewBackArrow);
         menuSelectedOptionCaller = findViewById(R.id.settingsIconImageView);
         menuOptionCaller = findViewById(R.id.viewSettingsChatScreen);
         fm  = getSupportFragmentManager();
@@ -187,6 +204,15 @@ public class ChatList extends AppCompatActivity {
             }
         });
 
+
+        selectedBackarrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
+
         searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -215,6 +241,12 @@ public class ChatList extends AppCompatActivity {
         pinChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for(ChatListItem c : selectedChatList){
+                    c.setPinStatus(true);
+                    databaseHelperPersonDetail.updatePersonalChatDetails(c);
+                }
+                chatListPagerAdapter.refreshRecycler(0);
+                onBackPressed();
             }
         });
         muteChat.setOnClickListener(new View.OnClickListener() {
@@ -226,6 +258,12 @@ public class ChatList extends AppCompatActivity {
         archiveChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                for(ChatListItem c : selectedChatList){
+                    c.setArchive(true);
+                    databaseHelperPersonDetail.updatePersonalChatDetails(c);
+                }
+                chatListPagerAdapter.refreshRecycler(0);
+                onBackPressed();
             }
         });
         searchIcon.setOnClickListener(new View.OnClickListener() {
@@ -471,6 +509,17 @@ public class ChatList extends AppCompatActivity {
                 }
             }
         }
+        public void refreshRecycler(int index){
+            if(index == 0){
+                cf.refreshRecycler();
+            }else{
+                if(index == 1){
+                    af.refreshRecycler();
+                }else{
+                    cof.refreshRecycler();
+                }
+            }
+        }
     }
 
     static List<ChatListItem> selectedChatList = new ArrayList<>();
@@ -479,12 +528,12 @@ public class ChatList extends AppCompatActivity {
     public static void selectedChat(ChatListItem m, int a) {
         selectedChatCount = a;
         if (selectedChatCount == 1) {
-            linearLayout.setVisibility(View.VISIBLE);
+            selectedActionLinearLayout.setVisibility(View.VISIBLE);
             linearLayout2.setVisibility(View.GONE);
             noOfChatsSelected.setText(String.valueOf(selectedChatCount));
         }
         if (selectedChatCount == 0) {
-            linearLayout.setVisibility(View.GONE);
+            selectedActionLinearLayout.setVisibility(View.GONE);
             linearLayout2.setVisibility(View.VISIBLE);
             noOfChatsSelected.setText(String.valueOf(selectedChatCount));
         }
