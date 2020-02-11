@@ -364,6 +364,8 @@ viewHolder.contactMessage.setOnClickListener(new View.OnClickListener() {
                 {
                     if(searchMessageIndexList.contains(i))
                     {
+
+
                         Log.i("searched",searchedString);
                         SpannableString ss = new SpannableString(messageInfo.getMessageText());
                         BackgroundColorSpan yellow = new BackgroundColorSpan(Color.YELLOW);
@@ -488,7 +490,7 @@ viewHolder.contactMessage.setOnClickListener(new View.OnClickListener() {
                         File localfile = new File(myDir, messageInfo.getMessageFile());
                         if(localfile.exists())
                         {
-                          Toast.makeText(mContext,"file already exist so it will no be downloaded from firebase",Toast.LENGTH_SHORT).show();
+                          Toast.makeText(mContext,"file already exist so it will not be downloaded from firebase",Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
